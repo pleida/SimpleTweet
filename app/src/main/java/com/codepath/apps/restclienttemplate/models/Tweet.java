@@ -4,15 +4,18 @@ package com.codepath.apps.restclienttemplate.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Parcel
 public class Tweet {
     public String body;
     public String createAt;
     public long id;
     public User user;
+
+    public Tweet(){}
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -30,4 +33,19 @@ public class Tweet {
         return tweets;
     }
 
+    public String getBody() {
+        return body;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
