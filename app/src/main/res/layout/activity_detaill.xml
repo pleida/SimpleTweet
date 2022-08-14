@@ -1,53 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    tools:context=".Detaill_Activity">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="9dp"
-        tools:srcCompat="@tools:sample/avatars" />
+    <!-- Load the toolbar here -->
+    <include
+        android:id="@+id/wToolBar"
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="263dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="TextView" />
+    <!-- Rest of content for the activity -->
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="322dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="7dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="TextView" />
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        tools:context=".Detaill_Activity">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="9dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="9dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="15dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/dtComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_marginStart="40dp"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="13dp"
+            app:drawableLeftCompat="@drawable/ic_comment"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtRetweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_retweet"
+            android:layout_toEndOf="@+id/dtComment"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtHeart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_heart"
+            android:layout_toEndOf="@+id/dtRetweet"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_share"
+            android:layout_toEndOf="@+id/dtHeart"
+            tools:text="23" />
+
+
+    </RelativeLayout>
+</LinearLayout>

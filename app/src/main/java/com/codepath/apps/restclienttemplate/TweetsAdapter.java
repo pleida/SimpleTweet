@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -77,13 +78,17 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
     public  class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivProfileImage;
         TextView tvBody;
-        TextView tvScreenName;
+        TextView tvName;
+        TextView tvUserName;
+        TextView tvDate;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener clickListener) {
             super(itemView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
-            tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvDate = itemView.findViewById(R.id.tvDate);
           itemView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
@@ -95,8 +100,11 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
 
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.screenName);
-            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            tvName.setText(tweet.user.getName());
+            tvUserName.setText(tweet.user.getScreenName());
+            tvDate.setText(Tweet.getFormattedTime(tweet.createAt));
+            Glide.with(context).load(tweet.user.profileImageUrl).transform(new RoundedCorners(100)).into(ivProfileImage);
+
         }
     }
 

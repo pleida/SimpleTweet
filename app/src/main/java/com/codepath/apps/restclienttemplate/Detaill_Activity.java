@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.parceler.Parcels;
@@ -32,7 +33,7 @@ public class Detaill_Activity extends AppCompatActivity {
         name.setText(tweet.getUser().getName());
         userName.setText(tweet.getUser().getScreenName());
 
-        Glide.with(this).load(tweet.user.profileImageUrl).into(imageView);
+        Glide.with(this).load(tweet.user.profileImageUrl).transform(new RoundedCorners(100)).into(imageView);
 
     }
 }
