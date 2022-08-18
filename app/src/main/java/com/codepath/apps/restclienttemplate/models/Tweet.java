@@ -16,6 +16,11 @@ public class Tweet {
     public String createAt;
     public long id;
     public User user;
+    public String favoriteCount;
+    public String retweetCount;
+    public Entities Entity;
+
+
 
     public Tweet(){}
 
@@ -25,6 +30,9 @@ public class Tweet {
         tweet.createAt = jsonObject.getString("created_at");
         tweet.id = jsonObject.getLong("id");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.Entity = Entities.fromJson(jsonObject.getJSONObject("entities"));
+        tweet.favoriteCount = jsonObject.getString("favorite_count");
+        tweet.retweetCount = jsonObject.getString("retweet_count");
         return tweet;
     }
     public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
@@ -33,6 +41,10 @@ public class Tweet {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
+    }
+
+    public static String getTimeStamp(String createAt) {
+        return TimeFormatter.getTimeStamp(createAt);
     }
 
     public String getBody() {
@@ -53,5 +65,13 @@ public class Tweet {
 
     public User getUser() {
         return user;
+    }
+
+    public String getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public String getRetweetCount() {
+        return retweetCount;
     }
 }

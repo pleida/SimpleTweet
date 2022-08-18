@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -60,22 +59,22 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="match_parent"
+            android:layout_width="389dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/userName"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="12dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/dtComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
+            android:layout_below="@+id/divider3"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="11dp"
             android:drawablePadding="8dp"
-            android:layout_marginTop="13dp"
             app:drawableLeftCompat="@drawable/ic_comment"
             tools:text="23" />
 
@@ -83,37 +82,107 @@
             android:id="@+id/dtRetweet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="14dp"
+            android:layout_below="@+id/divider3"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/dtComment"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_retweet"
-            android:layout_toEndOf="@+id/dtComment"
             tools:text="23" />
 
         <TextView
             android:id="@+id/dtHeart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
+            android:layout_below="@+id/divider3"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_heart"
-            android:layout_toEndOf="@+id/dtRetweet"
             tools:text="23" />
 
         <TextView
             android:id="@+id/dtShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="14dp"
+            android:layout_below="@+id/divider3"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dtHeart"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_share"
-            android:layout_toEndOf="@+id/dtHeart"
             tools:text="23" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dtUrl"
+            android:layout_marginStart="14dp"
+
+            android:layout_marginTop="2dp"
+            android:text="TextView" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tvTime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="9dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/tvFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider2"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="13dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvRetweets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider2"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/tvFavorites"
+            android:text="TextView" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tvRetweets"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="7dp"
+            android:background="?android:attr/listDivider" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/dtHeart"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="0dp"
+            android:background="?android:attr/listDivider" />
+
+        <ImageView
+            android:id="@+id/dtUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="133dp"
+            android:layout_marginTop="8dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
     </RelativeLayout>
