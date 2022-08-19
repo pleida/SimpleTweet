@@ -49,24 +49,12 @@
         tools:text="This is my favorite tweet." />
 
     <TextView
-        android:id="@+id/tvComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivUrl"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="5dp"
-        android:drawablePadding="8dp"
-        app:drawableLeftCompat="@drawable/ic_comment" />
-
-    <TextView
         android:id="@+id/tvRetweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivUrl"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/tvComment"
         android:drawablePadding="8dp"
         app:drawableLeftCompat="@drawable/ic_retweet" />
 
@@ -75,22 +63,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivUrl"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/tvRetweet"
         android:drawablePadding="8dp"
         app:drawableLeftCompat="@drawable/ic_heart" />
 
     <TextView
+        android:id="@+id/tvHeart_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUrl"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvRetweet"
+        android:drawablePadding="8dp"
+        app:drawableLeftCompat="@drawable/ic_heart_red" />
+
+    <TextView
         android:id="@+id/tvShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivUrl"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/tvHeart"
         android:drawablePadding="8dp"
-        app:drawableLeftCompat="@drawable/ic_share"/>
+        app:drawableLeftCompat="@drawable/ic_share" />
 
     <View
         android:id="@+id/divider"
@@ -120,7 +119,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="2dp"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:srcCompat="@tools:sample/avatars" />
 
 

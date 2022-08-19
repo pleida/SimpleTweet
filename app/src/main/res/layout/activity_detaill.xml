@@ -68,24 +68,12 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/dtComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/divider3"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="11dp"
-            android:drawablePadding="8dp"
-            app:drawableLeftCompat="@drawable/ic_comment"
-            tools:text="23" />
-
-        <TextView
             android:id="@+id/dtRetweet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
             android:layout_marginStart="37dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/dtComment"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_retweet"
             tools:text="23" />
@@ -95,11 +83,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_heart"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtHeart_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider3"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/dtRetweet"
+            android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_heart_red"
             tools:text="23" />
 
         <TextView
@@ -107,8 +107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="46dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtHeart"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_share"
@@ -121,7 +121,7 @@
             android:layout_below="@+id/dtUrl"
             android:layout_marginStart="14dp"
 
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="12dp"
             android:text="TextView" />
 
         <View
@@ -176,12 +176,13 @@
 
         <ImageView
             android:id="@+id/dtUrl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
             android:layout_below="@+id/description"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="133dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:visibility="gone"
             tools:srcCompat="@tools:sample/avatars" />
 
 

@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -83,6 +85,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
         TextView tvDate;
         TextView tvRetweet;
         TextView tvHeart;
+        TextView tvHeart_red;
         ImageView ivUrl;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener clickListener) {
@@ -94,6 +97,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvDate = itemView.findViewById(R.id.tvDate);
             tvRetweet = itemView.findViewById(R.id.tvRetweet);
             tvHeart = itemView.findViewById(R.id.tvHeart);
+            tvHeart_red = itemView.findViewById(R.id.tvHeart_red);
             ivUrl = itemView.findViewById(R.id.ivUrl);
           itemView.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -111,8 +115,72 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvDate.setText(Tweet.getFormattedTime(tweet.createAt));
             tvRetweet.setText(tweet.getRetweetCount());
             tvHeart.setText(tweet.getFavoriteCount());
-            Glide.with(context).load(tweet.user.profileImageUrl).transform(new RoundedCorners(100)).into(ivProfileImage);
-            Glide.with(context).load(tweet.Entity.mediaUrls).transform(new RoundedCorners(50)).into(ivUrl);
+
+            if(!tweet.favorited){
+                tvHeart.setVisibility(View.VISIBLE);
+                tvHeart_red.setVisibility(View.INVISIBLE);
+            }else{
+                tvHeart.setVisibility(View.INVISIBLE);
+                tvHeart_red.setVisibility(View.VISIBLE);
+            }
+
+            Glide.with(context)
+                    .load(tweet.user.profileImageUrl)
+                    .transform(new RoundedCorners(50))
+                    .into(ivProfileImage);
+
+            if(!tweet.Entity.mediaUrls.isEmpty()){
+                ivUrl.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(tweet.Entity.mediaUrls)
+                        .transform(new RoundedCorners(50))
+                        .into(ivUrl);
+            }
+
+
+            // Add click on icon
+
+            tvHeart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    int like = Integer.parseInt(tweet.favoriteCount);
+//                    if (!tweet.favorited){
+//                        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_heart_red);
+//                        drawable.setBounds(0,0,drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//                        tvHeart_red.setCompoundDrawables(drawable,null,null, null);
+//
+//                        tvHeart_red.setText(String.valueOf(++like));
+//                        tweet.favorited = true;
+//
+//                    }else {
+//                        ++like;
+//
+//                        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_heart);
+//                        drawable.setBounds(0,0,drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//                        tvHeart_red.setCompoundDrawables(drawable,null,null, null);
+//
+//                        tvHeart_red.setText(String.valueOf(--like));
+//                        tweet.favorited = false;
+//                    }
+                    tweet.favoriteCount++;
+                    tvHeart.setVisibility(View.INVISIBLE);
+                    tvHeart_red.setVisibility(View.VISIBLE);
+                    tvHeart_red.setText(tweet.getFavoriteCount());
+                    tweet.favorited = true;
+                }
+            });
+            tvHeart_red.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tweet.favoriteCount--;
+                    tvHeart.setVisibility(View.VISIBLE);
+                    tvHeart_red.setVisibility(View.INVISIBLE);
+                    tvHeart.setText(tweet.getFavoriteCount());
+                    tweet.favorited = false;
+
+                }
+            });
+
 
         }
     }
