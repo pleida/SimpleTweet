@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class Detaill_Activity extends AppCompatActivity {
     TextView dtHeart;
     TextView dtHeart_red;
     ImageView dtUrl;
+    EditText ptReply;
 
 
     @Override
@@ -78,6 +80,7 @@ public class Detaill_Activity extends AppCompatActivity {
         dtHeart = findViewById(R.id.dtHeart);
         dtHeart_red = findViewById(R.id.dtHeart_red);
         dtUrl = findViewById(R.id.dtUrl);
+        ptReply = findViewById(R.id.ptReply);
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweets"));
 
         description.setText(tweet.getBody());
@@ -86,6 +89,7 @@ public class Detaill_Activity extends AppCompatActivity {
         tvTime.setText(Tweet.getTimeStamp(tweet.createAt));
         tvFavorites.setText(tweet.getFavoriteCount() + " Favorites");
         tvRetweets.setText(tweet.getRetweetCount() + " Retweets");
+        ptReply.setHint("Reply to " + tweet.getUser().getName());
 
         dtRetweet.setText(tweet.getRetweetCount());
 

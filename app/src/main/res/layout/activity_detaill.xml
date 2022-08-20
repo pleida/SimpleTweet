@@ -199,15 +199,15 @@
 
         <EditText
             android:id="@+id/ptReply"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginBottom="9dp"
+
+            android:layout_marginTop="350dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Reply"
+            android:inputType="text"
+            android:hint="Reply"
             android:textSize="20dp" />
 
 
