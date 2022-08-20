@@ -182,25 +182,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    int like = Integer.parseInt(tweet.favoriteCount);
-//                    if (!tweet.favorited){
-//                        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_heart_red);
-//                        drawable.setBounds(0,0,drawable.getMinimumWidth(), drawable.getMinimumHeight());
-//                        tvHeart_red.setCompoundDrawables(drawable,null,null, null);
-//
-//                        tvHeart_red.setText(String.valueOf(++like));
-//                        tweet.favorited = true;
-//
-//                    }else {
-//                        ++like;
-//
-//                        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_heart);
-//                        drawable.setBounds(0,0,drawable.getMinimumWidth(), drawable.getMinimumHeight());
-//                        tvHeart_red.setCompoundDrawables(drawable,null,null, null);
-//
-//                        tvHeart_red.setText(String.valueOf(--like));
-//                        tweet.favorited = false;
-//                    }
+
                     tweet.favoriteCount++;
                     tvHeart.setVisibility(View.INVISIBLE);
                     tvHeart_red.setVisibility(View.VISIBLE);
