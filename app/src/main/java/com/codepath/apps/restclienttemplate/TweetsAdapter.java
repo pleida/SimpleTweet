@@ -84,6 +84,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
         TextView tvUserName;
         TextView tvDate;
         TextView tvRetweet;
+        TextView tvRetweet_green;
         TextView tvHeart;
         TextView tvHeart_red;
         ImageView ivUrl;
@@ -96,6 +97,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvRetweet = itemView.findViewById(R.id.tvRetweet);
+            tvRetweet_green = itemView.findViewById(R.id.tvRetweet_green);
             tvHeart = itemView.findViewById(R.id.tvHeart);
             tvHeart_red = itemView.findViewById(R.id.tvHeart_red);
             ivUrl = itemView.findViewById(R.id.ivUrl);
@@ -113,7 +115,19 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvName.setText(tweet.user.getName());
             tvUserName.setText(tweet.user.getScreenName());
             tvDate.setText(Tweet.getFormattedTime(tweet.createAt));
+
             tvRetweet.setText(tweet.getRetweetCount());
+
+            if(!tweet.retweeted){
+                tvRetweet.setVisibility(View.VISIBLE);
+                tvRetweet_green.setVisibility(View.INVISIBLE);
+            }else{
+                tvRetweet.setVisibility(View.INVISIBLE);
+                tvRetweet_green.setVisibility(View.VISIBLE);
+            }
+
+
+
             tvHeart.setText(tweet.getFavoriteCount());
 
             if(!tweet.favorited){
@@ -138,8 +152,33 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             }
 
 
-            // Add click on icon
+            // Add click on Retweet icon
+            tvRetweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tweet.retweetCount++;
+                    tvRetweet.setVisibility(View.INVISIBLE);
+                    tvRetweet_green.setVisibility(View.VISIBLE);
+                    tvRetweet_green.setText(tweet.getRetweetCount());
+                    tweet.retweeted = true;
 
+                }
+            });
+            tvRetweet_green.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    tweet.retweetCount--;
+                    tvRetweet.setVisibility(View.VISIBLE);
+                    tvRetweet_green.setVisibility(View.INVISIBLE);
+                    tvRetweet.setText(tweet.getRetweetCount());
+                    tweet.retweeted = false;
+
+                }
+            });
+
+
+            // Add click on Heart icon
             tvHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

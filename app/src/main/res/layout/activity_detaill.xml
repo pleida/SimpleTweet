@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -68,14 +68,38 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/dtRetweet"
+            android:id="@+id/dtReply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
             android:layout_marginStart="37dp"
             android:layout_marginTop="10dp"
             android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_reply"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtRetweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider3"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/dtReply"
+            android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_retweet"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/dtRetweet_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider3"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/dtReply"
+            android:drawablePadding="8dp"
+            app:drawableLeftCompat="@drawable/ic_retweet_green"
             tools:text="23" />
 
         <TextView
@@ -83,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="94dp"
+            android:layout_marginStart="96dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
@@ -95,23 +119,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="94dp"
+            android:layout_marginStart="96dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_heart_red"
-            tools:text="23" />
-
-        <TextView
-            android:id="@+id/dtShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/divider3"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/dtHeart"
-            android:drawablePadding="8dp"
-            app:drawableLeftCompat="@drawable/ic_share"
             tools:text="23" />
 
         <TextView
@@ -176,14 +188,27 @@
 
         <ImageView
             android:id="@+id/dtUrl"
-            android:layout_width="250dp"
-            android:layout_height="300dp"
+            android:layout_width="500dp"
+            android:layout_height="250dp"
             android:layout_below="@+id/description"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="11dp"
             android:visibility="gone"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <EditText
+            android:id="@+id/ptReply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="9dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Reply"
+            android:textSize="20dp" />
 
 
     </RelativeLayout>

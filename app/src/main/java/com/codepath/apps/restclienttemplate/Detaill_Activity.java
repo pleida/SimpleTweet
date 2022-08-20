@@ -24,8 +24,6 @@ import org.parceler.Parcels;
 
 public class Detaill_Activity extends AppCompatActivity {
 
-    Context context;
-
 
     ImageView imageView;
     TextView name;
@@ -35,6 +33,7 @@ public class Detaill_Activity extends AppCompatActivity {
     TextView tvFavorites;
     TextView tvRetweets;
     TextView dtRetweet;
+    TextView dtRetweet_green;
     TextView dtHeart;
     TextView dtHeart_red;
     ImageView dtUrl;
@@ -44,8 +43,9 @@ public class Detaill_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        int arrow = R.id.homeAsUp;
         Intent intent = new Intent(Detaill_Activity.this,TimelineActivity.class);
-        startActivity(intent);
-        return super.onOptionsItemSelected(item);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(intent, 0);
+        return true;
     }
 
     @Override
@@ -74,6 +74,7 @@ public class Detaill_Activity extends AppCompatActivity {
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
         dtRetweet = findViewById(R.id.dtRetweet);
+        dtRetweet_green = findViewById(R.id.dtRetweet_green);
         dtHeart = findViewById(R.id.dtHeart);
         dtHeart_red = findViewById(R.id.dtHeart_red);
         dtUrl = findViewById(R.id.dtUrl);
@@ -85,7 +86,18 @@ public class Detaill_Activity extends AppCompatActivity {
         tvTime.setText(Tweet.getTimeStamp(tweet.createAt));
         tvFavorites.setText(tweet.getFavoriteCount() + " Favorites");
         tvRetweets.setText(tweet.getRetweetCount() + " Retweets");
+
         dtRetweet.setText(tweet.getRetweetCount());
+
+        if(!tweet.retweeted){
+            dtRetweet.setVisibility(View.VISIBLE);
+            dtRetweet_green.setVisibility(View.INVISIBLE);
+        }else{
+            dtRetweet.setVisibility(View.INVISIBLE);
+            dtRetweet_green.setVisibility(View.VISIBLE);
+        }
+
+        // Condition for heart icon
         dtHeart.setText(tweet.getFavoriteCount());
 
         if(!tweet.favorited){
@@ -108,6 +120,33 @@ public class Detaill_Activity extends AppCompatActivity {
                     .transform(new RoundedCorners(50))
                     .into(dtUrl);
         }
+
+        // Add click on Retweet icon
+        dtRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tweet.retweetCount++;
+                dtRetweet.setVisibility(View.INVISIBLE);
+                dtRetweet_green.setVisibility(View.VISIBLE);
+                dtRetweet_green.setText(tweet.getRetweetCount());
+                tweet.retweeted = true;
+
+            }
+        });
+        dtRetweet_green.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                tweet.retweetCount--;
+                dtRetweet.setVisibility(View.VISIBLE);
+                dtRetweet_green.setVisibility(View.INVISIBLE);
+                dtRetweet.setText(tweet.getRetweetCount());
+                tweet.retweeted = false;
+
+            }
+        });
+
+        // Add click on Heart icon
         dtHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
