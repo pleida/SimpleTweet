@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
    <item
-       android:id="@+id/icon"
+       android:id="@+id/at_icon"
        app:showAsAction="always|collapseActionView"
        android:icon="@drawable/ic_add_tweet"
        android:orderInCategory="50"
-       android:title="SimpleTweet"/>
+       android:title="Compose"/>
 
 </menu>

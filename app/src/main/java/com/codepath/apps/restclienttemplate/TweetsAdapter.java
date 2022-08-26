@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
+
 
 public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolder>{
 
@@ -58,6 +61,13 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
         holder.bind(tweet);
     }
 
+    private void showEditDialog() {
+        FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
+        ReplyFragment replyFragment = ReplyFragment.newInstance("Some Title");
+        replyFragment.show(fm, "fragment_reply");
+    }
+
+
 
     @Override
     public int getItemCount() {
@@ -87,7 +97,9 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
         TextView tvRetweet_green;
         TextView tvHeart;
         TextView tvHeart_red;
+        TextView tvReply;
         ImageView ivUrl;
+
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener clickListener) {
             super(itemView);
@@ -100,6 +112,9 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvRetweet_green = itemView.findViewById(R.id.tvRetweet_green);
             tvHeart = itemView.findViewById(R.id.tvHeart);
             tvHeart_red = itemView.findViewById(R.id.tvHeart_red);
+
+            tvReply = itemView.findViewById(R.id.tvReply);
+
             ivUrl = itemView.findViewById(R.id.ivUrl);
           itemView.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -143,13 +158,13 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
                     .transform(new RoundedCorners(50))
                     .into(ivProfileImage);
 
-            if(!tweet.Entity.mediaUrls.isEmpty()){
-                ivUrl.setVisibility(View.VISIBLE);
-                Glide.with(context)
-                        .load(tweet.Entity.mediaUrls)
-                        .transform(new RoundedCorners(50))
-                        .into(ivUrl);
-            }
+//            if(!tweet.Entity.mediaUrls.isEmpty()){
+//                ivUrl.setVisibility(View.VISIBLE);
+//                Glide.with(context)
+//                        .load(tweet.Entity.mediaUrls)
+//                        .transform(new RoundedCorners(50))
+//                        .into(ivUrl);
+//            }
 
 
             // Add click on Retweet icon
@@ -202,7 +217,13 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
                 }
             });
 
-
+            // click on reply icon
+            tvReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showEditDialog();
+                }
+            });
         }
     }
 
