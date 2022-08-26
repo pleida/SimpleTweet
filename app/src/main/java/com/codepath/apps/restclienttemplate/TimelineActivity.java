@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.codepath.apps.restclienttemplate.ComposeFragment.ComposeListener;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
 import com.codepath.apps.restclienttemplate.models.TweetWithUser;
@@ -30,7 +31,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeListener{
 
     public static final String TAG = "TimelineActivity";
 
@@ -46,7 +47,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetDao tweetDao;
 
 
-
+    // method
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
         ComposeFragment composeFragment = ComposeFragment.newInstance("Some Title");
@@ -59,11 +60,11 @@ public class TimelineActivity extends AppCompatActivity {
         if ( requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             // Get data from the intent (tweet)
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
-            // Update the RV with the tweet
             // Modify data source of tweets
             tweets.add(0, tweet);
             // update the adapter
             adapter.notifyItemInserted(0);
+            // Update the RV with the tweet
             rvTweets.smoothScrollToPosition(0);
         }
 
@@ -217,13 +218,13 @@ public class TimelineActivity extends AppCompatActivity {
                                 // insert tweets next
                                 tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet
                                         [0]));
-                                //
+
 //                                List<Entities> EntitiesFromNetwork = Entities.fromJsonTweetArray(tweetsFromNetwork);
 //                                tweetDao.insertModel(EntitiesFromNetwork.toArray(new Entities
 //                                        [0]));
                             }
                         });
-//                        adapter.notifyDataSetChanged();
+
                     } catch (JSONException e) {
                         Log.e(TAG,"Json exception",e);
                     }
@@ -238,4 +239,11 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onFinishCompose(Tweet tweet) {
+        tweets.add(0, tweet);
+        // update the adapter
+        adapter.notifyItemInserted(0);
+        rvTweets.smoothScrollToPosition(0);
+    }
 }

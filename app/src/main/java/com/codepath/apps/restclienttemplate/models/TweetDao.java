@@ -13,7 +13,6 @@ public interface TweetDao {
             "FROM Tweet INNER JOIN User ON Tweet.userId = User.id ORDER BY Tweet.createAt DESC LIMIT 5")
     List<TweetWithUser> recentItems();
 
-    //"SELECT Tweet.body AS tweet_boby, Tweet.createAt AS tweet_createAt, Tweet.id AS tweet_id, User.* "
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertModel(Tweet... tweets);

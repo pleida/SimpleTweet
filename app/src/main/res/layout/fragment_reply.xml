@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComposeActivity">
+    tools:context=".ReplyFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ltTextfield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#1DA1F2"
+       app:hintTextColor="#1DA1F2"
         app:boxStrokeColor="#1DA1F2"
         app:counterEnabled="true"
         app:counterMaxLength="140">
@@ -29,7 +29,7 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="@string/what_s_happening"
+            android:hint="@string/tweet_your_reply"
             android:inputType="textMultiLine"
             android:minLines="5"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -38,7 +38,7 @@
 
 
     <Button
-        android:id="@+id/btnTweet"
+        android:id="@+id/btnReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="-1dp"
         android:backgroundTint="#1DA1F2"
         android:elevation="12dp"
-        android:text="@string/tweet"
+        android:text="@string/reply"
         android:textColor="@color/white" />
 
 </RelativeLayout>
