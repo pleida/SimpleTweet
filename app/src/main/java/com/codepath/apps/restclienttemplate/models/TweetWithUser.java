@@ -11,8 +11,8 @@ public class TweetWithUser {
     @Embedded
     User user;
 
-//    @Embedded
-//    Entities Entity;
+    @Embedded
+    Entities Entity;
 
 
     @Embedded(prefix = "tweet_")
@@ -23,7 +23,7 @@ public class TweetWithUser {
         for (int i = 0; i < tweetWithUsers.size(); i++) {
             Tweet tweet = tweetWithUsers.get(i).tweet;
             tweet.user = tweetWithUsers.get(i).user;
-//            tweet.Entity = tweetWithUsers.get(i).Entity;
+            tweet.Entity = tweetWithUsers.get(i).Entity;
             tweets.add(tweet);
         }
         return tweets;

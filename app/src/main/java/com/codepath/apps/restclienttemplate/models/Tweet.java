@@ -102,4 +102,8 @@ public class Tweet {
     public String getRetweetCount() {
         return String.valueOf(retweetCount);
     }
+
+    public String getUrl() {
+        return  "https://twitter.com" +user.screenName+ "/status/"+id;
+    }
 }

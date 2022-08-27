@@ -7,14 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".ReplyFragment">
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ltTextfield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       app:hintTextColor="#1DA1F2"
+        android:layout_below="@+id/tvReplyTo"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="29dp"
         app:boxStrokeColor="#1DA1F2"
         app:counterEnabled="true"
-        app:counterMaxLength="140">
+        app:counterMaxLength="140"
+        app:hintTextColor="#1DA1F2">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,19 +41,77 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Button
         android:id="@+id/btnReply"
-        android:layout_width="wrap_content"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ltTextfield"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
-        android:layout_below="@id/ltTextfield"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="-1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="29dp"
         android:backgroundTint="#1DA1F2"
         android:elevation="12dp"
-        android:text="@string/reply"
+        android:text="TWEET"
         android:textColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/ibCancel"
+        android:layout_width="92dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/btn_cancel" />
+
+    <ImageView
+        android:id="@+id/ivProfil"
+        android:layout_width="67dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvMyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/ivProfil"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvMyUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMyName"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="12dp"
+        android:layout_toStartOf="@+id/ivProfil"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/ivArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ibCancel"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_arrow_bown" />
+
+    <TextView
+        android:id="@+id/tvReplyTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ibCancel"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="27dp"
+        android:layout_toEndOf="@+id/ivArrow"
+        android:text="TextView" />
 
 </RelativeLayout>

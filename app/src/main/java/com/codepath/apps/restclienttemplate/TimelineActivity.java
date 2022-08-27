@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.codepath.apps.restclienttemplate.ComposeFragment.ComposeListener;
+import com.codepath.apps.restclienttemplate.models.Entities;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
 import com.codepath.apps.restclienttemplate.models.TweetWithUser;
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -37,6 +39,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
 
     private final int REQUEST_CODE = 20;
 
+    public static User user;
+
     TwitterClient client;
     RecyclerView rvTweets;
     List<Tweet> tweets;
@@ -47,10 +51,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
     TweetDao tweetDao;
 
 
-    // method
+
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
         ComposeFragment composeFragment = ComposeFragment.newInstance("Some Title");
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("userInfo",Parcels.wrap(user));
+        composeFragment.setArguments(bundle);
         composeFragment.show(fm, "fragment_compose");
     }
 
@@ -219,9 +226,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
                                 tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet
                                         [0]));
 
-//                                List<Entities> EntitiesFromNetwork = Entities.fromJsonTweetArray(tweetsFromNetwork);
-//                                tweetDao.insertModel(EntitiesFromNetwork.toArray(new Entities
-//                                        [0]));
+                                List<Entities> EntitiesFromNetwork = Entities.fromJsonTweetArray(tweetsFromNetwork);
+                                tweetDao.insertModel(EntitiesFromNetwork.toArray(new Entities
+                                        [0]));
                             }
                         });
 
@@ -237,6 +244,27 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
                 Log.i(TAG,"onFailure! " + response, throwable);
             }
         });
+
+
+        client.getInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG,"onSuccess!" + json.toString());
+                JSONObject jsonObject= json.jsonObject;
+                try {
+                    user =User.fromJson(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.i(TAG,"onFailure!" + throwable);
+            }
+        });
+
     }
 
     @Override

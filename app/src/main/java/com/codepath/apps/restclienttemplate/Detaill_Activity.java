@@ -3,14 +3,13 @@ package com.codepath.apps.restclienttemplate;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -20,10 +19,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 
 import org.parceler.Parcels;
 
 public class Detaill_Activity extends AppCompatActivity {
+
+    Context context;
 
 
     ImageView imageView;
@@ -37,8 +39,10 @@ public class Detaill_Activity extends AppCompatActivity {
     TextView dtRetweet_green;
     TextView dtHeart;
     TextView dtHeart_red;
+    TextView dtReply;
+    TextView dtShare;
     ImageView dtUrl;
-    EditText ptReply;
+    EditText etReply;
 
 
     @Override
@@ -49,6 +53,17 @@ public class Detaill_Activity extends AppCompatActivity {
         startActivityIfNeeded(intent, 0);
         return true;
     }
+
+    private void showEditDialog(Parcelable tweet) {
+        FragmentManager fm = getSupportFragmentManager();
+        ReplyFragment replyFragment = ReplyFragment.newInstance("Some Title");
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("userInfo", Parcels.wrap(TimelineActivity.user));
+        bundle.putParcelable("tweet", tweet);
+        replyFragment.setArguments(bundle);
+        replyFragment.show(fm, "fragment_reply");
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +95,10 @@ public class Detaill_Activity extends AppCompatActivity {
         dtHeart = findViewById(R.id.dtHeart);
         dtHeart_red = findViewById(R.id.dtHeart_red);
         dtUrl = findViewById(R.id.dtUrl);
-        ptReply = findViewById(R.id.ptReply);
+        dtReply = findViewById(R.id.dtReply);
+        dtShare = findViewById(R.id.dtShare);
+        etReply = findViewById(R.id.etReply);
+
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweets"));
 
         description.setText(tweet.getBody());
@@ -89,7 +107,27 @@ public class Detaill_Activity extends AppCompatActivity {
         tvTime.setText(Tweet.getTimeStamp(tweet.createAt));
         tvFavorites.setText(tweet.getFavoriteCount() + " Favorites");
         tvRetweets.setText(tweet.getRetweetCount() + " Retweets");
-        ptReply.setHint("Reply to " + tweet.getUser().getName());
+        etReply.setHint("Reply to " + tweet.getUser().getName());
+
+        // Click on Reply icon
+        dtReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditDialog(Parcels.wrap(tweet));
+            }
+
+        });
+
+        // Click on Share icon
+        dtShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, tweet.getUrl());
+                startActivity(Intent.createChooser(shareIntent, "Share link using"));
+            }
+        });
 
         dtRetweet.setText(tweet.getRetweetCount());
 

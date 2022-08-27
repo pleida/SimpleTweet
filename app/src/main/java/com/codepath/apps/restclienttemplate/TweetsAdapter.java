@@ -2,6 +2,8 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -61,9 +66,13 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
         holder.bind(tweet);
     }
 
-    private void showEditDialog() {
+    private void showEditDialog(Parcelable tweet) {
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
         ReplyFragment replyFragment = ReplyFragment.newInstance("Some Title");
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("userInfo", Parcels.wrap(TimelineActivity.user));
+        bundle.putParcelable("tweet", tweet);
+        replyFragment.setArguments(bundle);
         replyFragment.show(fm, "fragment_reply");
     }
 
@@ -158,13 +167,13 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
                     .transform(new RoundedCorners(50))
                     .into(ivProfileImage);
 
-//            if(!tweet.Entity.mediaUrls.isEmpty()){
-//                ivUrl.setVisibility(View.VISIBLE);
-//                Glide.with(context)
-//                        .load(tweet.Entity.mediaUrls)
-//                        .transform(new RoundedCorners(50))
-//                        .into(ivUrl);
-//            }
+            if(!tweet.Entity.mediaUrls.isEmpty()){
+                ivUrl.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(tweet.Entity.mediaUrls)
+                        .transform(new RoundedCorners(50))
+                        .into(ivUrl);
+            }
 
 
             // Add click on Retweet icon
@@ -221,7 +230,7 @@ public class TweetsAdapter extends  RecyclerView.Adapter<TweetsAdapter.ViewHolde
             tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showEditDialog();
+                    showEditDialog(Parcels.wrap(tweet));
                 }
             });
         }

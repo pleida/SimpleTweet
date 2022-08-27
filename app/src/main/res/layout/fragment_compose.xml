@@ -5,20 +5,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComposeActivity">
+    tools:context=".ComposeFragment">
+
+
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ltTextfield"
+        android:id="@+id/ltTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfil"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        app:hintTextColor="#1DA1F2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="23dp"
         app:boxStrokeColor="#1DA1F2"
         app:counterEnabled="true"
-        app:counterMaxLength="140">
+        app:counterMaxLength="140"
+        app:hintTextColor="#1DA1F2">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -35,20 +39,20 @@
             android:gravity="start|top"
             android:hint="@string/what_s_happening"
             android:inputType="textMultiLine"
-            android:minLines="5"
+            android:minLines="15"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnTweet"
-        android:layout_width="wrap_content"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ltTextInput"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
-        android:layout_below="@id/ltTextfield"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="-1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="17dp"
         android:backgroundTint="#1DA1F2"
         android:elevation="12dp"
         android:text="@string/tweet"

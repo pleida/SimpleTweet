@@ -2,7 +2,9 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +12,18 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
@@ -35,6 +43,11 @@ public class ComposeFragment extends DialogFragment {
 
     private EditText mEditext;
      Button btnTweet;
+     ImageButton ibCancel;
+     TextView tvName;
+     TextView tvUserName;
+     ImageView ivProfil;
+
 
     public ComposeFragment() {
         // Empty constructor is required for DialogFragment
@@ -67,6 +80,42 @@ public class ComposeFragment extends DialogFragment {
         client =TwitterApp.getRestClient(context);
         mEditext = (EditText) view.findViewById(R.id.etCompose);
         btnTweet =  view.findViewById(R.id.btnTweet);
+        ibCancel = view.findViewById(R.id.ibCancel);
+        tvName = view.findViewById(R.id.tvName);
+        tvUserName = view.findViewById(R.id.tvUserName);
+        ivProfil = view.findViewById(R.id.ivProfil);
+
+        Bundle bundle=getArguments();
+        User user= Parcels.unwrap(bundle.getParcelable("userInfo"));
+
+        tvName.setText(user.getName());
+        tvUserName.setText(user.getScreenName());
+        Glide.with(getContext())
+                .load(user.getProfileImageUrl())
+                .transform(new RoundedCorners(100))
+                .into(ivProfil);
+
+
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String username = pref.getString("username", "");
+        if (!username.isEmpty()){
+            mEditext.setText(username);
+        }
+
+
+        ibCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences pref =
+                        PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("username", mEditext.getText().toString());
+                edit.commit();
+                dismiss();
+            }
+        });
+
 
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");

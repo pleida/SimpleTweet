@@ -1,7 +1,9 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +11,24 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import okhttp3.Headers;
 // ...
@@ -26,16 +36,28 @@ import okhttp3.Headers;
 public class ReplyFragment extends DialogFragment {
     public  static String  TAG = "ReplyFragment";
     public static final int MAXLINES = 140;
+    TwitterClient client;
+
+
     private EditText mEditText;
     Context context;
     Button btnReply;
-    TwitterClient client;
+    ImageButton ibCancel;
+    TextView tvMyName;
+    TextView tvMyUserName;
+    TextView tvReplyTo;
+    TextInputLayout ltTextfield;
+    ImageView ivProfil;
+
+
 
     public ReplyFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
+
+
 //    interface listener
     public interface ReplyFragmentListener{
         void onFinishReply(Tweet tweet);
@@ -62,6 +84,12 @@ public class ReplyFragment extends DialogFragment {
         client = TwitterApp.getRestClient(context);
         btnReply = view.findViewById(R.id.btnReply);
         mEditText = (EditText) view.findViewById(R.id.etReply);
+        ibCancel = view.findViewById(R.id.ibCancel);
+        tvMyName = view.findViewById(R.id.tvMyName);
+        tvMyUserName = view.findViewById(R.id.tvMyUserName);
+        tvReplyTo = view.findViewById(R.id.tvReplyTo);
+        ltTextfield = view.findViewById(R.id.ltTextfield);
+        ivProfil = view.findViewById(R.id.ivProfil);
 
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
@@ -71,6 +99,42 @@ public class ReplyFragment extends DialogFragment {
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         getDialog().getWindow().setLayout(700,1350);
+
+        Bundle bundle=getArguments();
+        User user= Parcels.unwrap(bundle.getParcelable("userInfo"));
+        Tweet tweet = Parcels.unwrap(bundle.getParcelable("tweet"));
+
+        tvMyName.setText(user.getName());
+        tvMyUserName.setText(user.getScreenName());
+        tvReplyTo.setText("In reply to " + tweet.user.getName());
+        ltTextfield.setHint(tweet.user.getScreenName());
+
+        Glide.with(getContext())
+                .load(user.getProfileImageUrl())
+                .transform(new RoundedCorners(100))
+                .into(ivProfil);
+
+
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String username = pref.getString("username", "");
+        if (!username.isEmpty()){
+            mEditText.setText(username);
+        }
+
+        //Click on cancel button
+        ibCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences pref =
+                        PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("username", mEditText.getText().toString());
+                edit.commit();
+                dismiss();
+            }
+        });
+
 
         // Click on Tweet button
         btnReply.setOnClickListener(new View.OnClickListener() {

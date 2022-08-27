@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="14dp"
             android:drawablePadding="8dp"
             app:drawableLeftCompat="@drawable/ic_reply"
             tools:text="23" />
@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="94dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtReply"
             android:drawablePadding="8dp"
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="94dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtReply"
             android:drawablePadding="8dp"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="96dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider3"
-            android:layout_marginStart="96dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/dtRetweet"
             android:drawablePadding="8dp"
@@ -127,12 +127,22 @@
             tools:text="23" />
 
         <TextView
+            android:id="@+id/dtShare"
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/divider3"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/dtHeart"
+            app:drawableLeftCompat="@drawable/ic_share" />
+
+        <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dtUrl"
             android:layout_marginStart="14dp"
-
             android:layout_marginTop="12dp"
             android:text="TextView" />
 
@@ -197,16 +207,49 @@
             android:visibility="gone"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <EditText
-            android:id="@+id/ptReply"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ltTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="350dp"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Reply"
-            android:textSize="20dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="-2dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="66dp"
+            app:boxStrokeColor="#1DA1F2"
+            app:counterEnabled="true"
+            app:counterMaxLength="140"
+            app:hintTextColor="#1DA1F2">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/etReply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="350dp"
+                android:ems="10"
+                android:hint="Reply"
+                android:inputType="text"
+                android:textSize="20dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnreply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="#1DA1F2"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="9dp"
+            android:text="TWEET" />
 
 
     </RelativeLayout>

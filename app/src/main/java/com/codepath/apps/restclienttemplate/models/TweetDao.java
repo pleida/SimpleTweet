@@ -9,8 +9,8 @@ import java.util.List;
 
 @Dao
 public interface TweetDao {
-    @Query("SELECT Tweet.body AS tweet_boby, Tweet.createAt AS tweet_createAt, Tweet.id AS tweet_id, Tweet.favoriteCount AS tweet_favoriteCount, Tweet.retweetCount AS tweet_retweetCount, Tweet.favorited AS tweet_favorited, Tweet.retweeted AS tweet_retweeted, User.* " +
-            "FROM Tweet INNER JOIN User ON Tweet.userId = User.id ORDER BY Tweet.createAt DESC LIMIT 5")
+    @Query("SELECT Tweet.body AS tweet_boby, Tweet.createAt AS tweet_createAt, Tweet.id AS tweet_id, Tweet.favoriteCount AS tweet_favoriteCount, Tweet.retweetCount AS tweet_retweetCount, Tweet.favorited AS tweet_favorited, Tweet.retweeted AS tweet_retweeted, User.*, Entities.* " +
+            "FROM Tweet, Entities INNER JOIN User ON Tweet.userId = User.id ORDER BY Tweet.createAt DESC LIMIT 300")
     List<TweetWithUser> recentItems();
 
 
@@ -20,7 +20,7 @@ public interface TweetDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertModel(User... users);
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    void insertModel(Entities...entities);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertModel(Entities...entities);
 
 }

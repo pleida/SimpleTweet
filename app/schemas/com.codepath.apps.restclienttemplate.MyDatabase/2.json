@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "1e2a7f4477b3338b1e0b5fd1a593eb59",
+    "identityHash": "1786bf9627ac5671fbd1ed6e56125dbd",
     "entities": [
       {
         "tableName": "SampleModel",
@@ -141,12 +141,38 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Entities",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_enty` INTEGER, `mediaUrls` TEXT, PRIMARY KEY(`id_enty`))",
+        "fields": [
+          {
+            "fieldPath": "id_enty",
+            "columnName": "id_enty",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mediaUrls",
+            "columnName": "mediaUrls",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_enty"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1e2a7f4477b3338b1e0b5fd1a593eb59')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1786bf9627ac5671fbd1ed6e56125dbd')"
     ]
   }
 }
