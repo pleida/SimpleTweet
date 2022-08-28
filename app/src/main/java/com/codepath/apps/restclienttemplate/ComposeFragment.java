@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.parceler.Parcels;
@@ -47,6 +50,7 @@ public class ComposeFragment extends DialogFragment {
      TextView tvName;
      TextView tvUserName;
      ImageView ivProfil;
+     TextInputLayout ltTextInput;
 
 
     public ComposeFragment() {
@@ -84,6 +88,7 @@ public class ComposeFragment extends DialogFragment {
         tvName = view.findViewById(R.id.tvName);
         tvUserName = view.findViewById(R.id.tvUserName);
         ivProfil = view.findViewById(R.id.ivProfil);
+        ltTextInput = view.findViewById(R.id.ltTextInput);
 
         Bundle bundle=getArguments();
         User user= Parcels.unwrap(bundle.getParcelable("userInfo"));
@@ -94,6 +99,7 @@ public class ComposeFragment extends DialogFragment {
                 .load(user.getProfileImageUrl())
                 .transform(new RoundedCorners(100))
                 .into(ivProfil);
+        ltTextInput.setHint("What's happening");
 
 
 
@@ -107,12 +113,7 @@ public class ComposeFragment extends DialogFragment {
         ibCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref =
-                        PreferenceManager.getDefaultSharedPreferences(getContext());
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("username", mEditext.getText().toString());
-                edit.commit();
-                dismiss();
+                open();
             }
         });
 
@@ -172,6 +173,38 @@ public class ComposeFragment extends DialogFragment {
         });
 
 
+    }
+
+
+    public void open(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setMessage("Save Draft");
+                alertDialogBuilder.setPositiveButton("Save",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Save();
+                            }
+                        });
+
+        alertDialogBuilder.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void Save(){
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString("username", mEditext.getText().toString());
+        edit.commit();
+        dismiss();
     }
 
 }

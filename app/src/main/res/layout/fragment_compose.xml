@@ -39,7 +39,7 @@
             android:gravity="start|top"
             android:hint="@string/what_s_happening"
             android:inputType="textMultiLine"
-            android:minLines="15"
+            android:minLines="10"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
