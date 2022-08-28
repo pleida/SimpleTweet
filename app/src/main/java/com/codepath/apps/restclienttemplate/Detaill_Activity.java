@@ -32,7 +32,7 @@ import okhttp3.Headers;
 
 public class Detaill_Activity extends AppCompatActivity {
 
-//    Context context;
+   Context context;
     public static final int Max_Lines = 140;
     TwitterClient client;
 
@@ -111,7 +111,7 @@ public class Detaill_Activity extends AppCompatActivity {
         btnTweet = findViewById(R.id.btnTweet);
 
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweets"));
-
+        client =TwitterApp.getRestClient(context);
         description.setText(tweet.getBody());
         name.setText(tweet.getUser().getName());
         userName.setText(tweet.getUser().getScreenName());
