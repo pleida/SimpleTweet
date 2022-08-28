@@ -10,24 +10,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.parceler.Parcels;
+
+import okhttp3.Headers;
 
 public class Detaill_Activity extends AppCompatActivity {
 
-    Context context;
+//    Context context;
+    public static final int Max_Lines = 140;
+    TwitterClient client;
 
 
+    Button btnTweet;
     ImageView imageView;
     TextView name;
     TextView userName;
@@ -98,6 +108,7 @@ public class Detaill_Activity extends AppCompatActivity {
         dtReply = findViewById(R.id.dtReply);
         dtShare = findViewById(R.id.dtShare);
         etReply = findViewById(R.id.etReply);
+        btnTweet = findViewById(R.id.btnTweet);
 
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweets"));
 
@@ -126,6 +137,50 @@ public class Detaill_Activity extends AppCompatActivity {
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, tweet.getUrl());
                 startActivity(Intent.createChooser(shareIntent, "Share link using"));
+            }
+        });
+
+        // click on Tweet button
+        btnTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tweetContent = etReply.getText().toString();
+                if (tweetContent.isEmpty()) {
+                    Toast.makeText(Detaill_Activity.this, "Sorry your tweet cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (tweetContent.length() > Max_Lines) {
+                    Toast.makeText(Detaill_Activity.this, "Sorry your tweet is too long", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        try {
+                            Tweet tweet = Tweet.fromJson(json.jsonObject);
+                            Log.i("tweet", tweet.body);
+
+
+
+                            etReply.setHint("Reply");
+                            etReply.setText("");
+                            Toast.makeText(Detaill_Activity.this, "Tweeted", Toast.LENGTH_LONG).show();
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+
+                    }
+                });
+
             }
         });
 

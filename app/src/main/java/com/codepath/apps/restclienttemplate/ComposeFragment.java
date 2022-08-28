@@ -59,9 +59,6 @@ public class ComposeFragment extends DialogFragment {
         // Use `newInstance` instead as shown below
     }
 
-    public interface ComposeListener {
-        void onFinishCompose(Tweet tweet);
-    }
 
     public static ComposeFragment newInstance(String title) {
         ComposeFragment frag = new ComposeFragment();
@@ -205,6 +202,10 @@ public class ComposeFragment extends DialogFragment {
         edit.putString("username", mEditext.getText().toString());
         edit.commit();
         dismiss();
+    }
+
+    public interface ComposeListener {
+        void onFinishCompose(Tweet tweet);
     }
 
 }

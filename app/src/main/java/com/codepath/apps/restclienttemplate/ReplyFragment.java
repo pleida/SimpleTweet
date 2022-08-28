@@ -58,11 +58,6 @@ public class ReplyFragment extends DialogFragment {
     }
 
 
-//    interface listener
-    public interface ReplyFragmentListener{
-        void onFinishReply(Tweet tweet);
-}
-
     public static ReplyFragment newInstance(String title) {
         ReplyFragment frag = new ReplyFragment();
         Bundle args = new Bundle();
@@ -180,4 +175,10 @@ public class ReplyFragment extends DialogFragment {
         });
 
     }
+
+    //    interface listener
+    public interface ReplyFragmentListener{
+        void onFinishReply(Tweet tweet);
+    }
+
 }

@@ -33,7 +33,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity implements ComposeListener{
+public class TimelineActivity extends AppCompatActivity implements ComposeFragment.ComposeListener{
 
     public static final String TAG = "TimelineActivity";
 
